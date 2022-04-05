@@ -30,7 +30,7 @@ namespace AbaloneGame
         {
             this.currentplayer = 1;
             this.board = new Board();
-            this.board.initializeBoard(0);
+            //this.board.initializeBoard(0);
         }
         /**
         * the program get called once the client pressed the start game button.

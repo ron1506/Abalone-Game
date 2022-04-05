@@ -21,7 +21,12 @@ namespace AbaloneGame
         public MainForm(bool isPvP, int layout)
         {
             gm = new GameManager();
-            gm.StartGamePlayerVsPlayer(0);
+            if (isPvP)
+                gm.StartGamePlayerVsPlayer(layout);
+            else
+            {
+                //AI
+            }
             GraphicsManager.init_dictionary();
             InitializeComponent();
         }
@@ -34,7 +39,6 @@ namespace AbaloneGame
         {
             GraphicsManager.PaintBoard(e.Graphics, gm.Board);
             label3.Text = gm.PlayerTurn() + " Player turn.";
-            //label4.Text = "Choose the board layout.";
         }
 
         private void pictureBox1_onClick(object sender, MouseEventArgs e)
@@ -49,8 +53,16 @@ namespace AbaloneGame
             }
             if (gm.isGameOver())
             {
-                MessageBox.Show("Game is over" + gm.PlayerTurn() + "won.");
+                MessageBox.Show("Game is over " + gm.PlayerTurn() + " won.");
+
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenForm of = new OpenForm();
+            this.Hide();
+            of.Show();
         }
     }
 }

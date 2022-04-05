@@ -85,6 +85,135 @@ namespace AbaloneGame.model
         * whiteSet, BlackSet, EdgeOfBoard.
         * @param BoardLayout - sets the start game layout according to the BoardLayout
         */
+        //public void initializeBoard(int BoardLayout)
+        //{
+        //    initpathArr();
+        //    scoreWhite = 0;
+        //    scoreBlack = 0;
+        //    EdgeOfBoard = new BitSet(121);
+        //    WhiteSet = new BitSet(121);
+        //    BlackSet = new BitSet(121);
+        //    ///board edges layout.
+        //    EdgeOfBoard.set(12, 17);
+        //    EdgeOfBoard.set(23, 30);
+        //    EdgeOfBoard.set(34, 42);
+        //    EdgeOfBoard.set(45, 54);
+        //    EdgeOfBoard.set(56, 66);
+        //    EdgeOfBoard.set(68, 77);
+        //    EdgeOfBoard.set(80, 88);
+        //    EdgeOfBoard.set(92, 99);
+        //    EdgeOfBoard.set(104, 110);
+        //    //classic layout
+        //    if (BoardLayout == 0)
+        //    {
+        //        ///whiteSet, player 1
+        //        WhiteSet.set(12, 14);
+        //        WhiteSet.set(23, 25);
+        //        WhiteSet.set(34, 37);
+        //        WhiteSet.set(45, 48);
+        //        WhiteSet.set(56, 59);
+        //        WhiteSet.set(68);
+        //        //Blackset, player -1
+        //        BlackSet.set(52);
+        //        BlackSet.set(62, 65);
+        //        BlackSet.set(73, 76);
+        //        BlackSet.set(84, 87);
+        //        BlackSet.set(96, 98);
+        //        BlackSet.set(107, 109);
+        //    }
+        //    //pro layout
+        //    if (BoardLayout == 1)
+        //    {
+        //        //top left
+        //        WhiteSet.set(39, 41);
+        //        WhiteSet.set(50, 53);
+        //        WhiteSet.set(62, 64);
+        //        //top right
+        //        BlackSet.set(83, 85);
+        //        BlackSet.set(94, 97);
+        //        BlackSet.set(106, 108);
+        //        //bottom left
+        //        BlackSet.set(13, 15);
+        //        BlackSet.set(24, 27);
+        //        BlackSet.set(36, 38);
+        //        //bottom right
+        //        WhiteSet.set(57, 59);
+        //        WhiteSet.set(68, 71);
+        //        WhiteSet.set(80, 82);
+        //    }
+        //    //snake layout
+        //    if (BoardLayout == 2)
+        //    {
+        //        //start in bottom left
+        //        WhiteSet.set(12);
+        //        WhiteSet.set(23);
+        //        WhiteSet.set(34);
+        //        WhiteSet.set(45);
+        //        WhiteSet.set(56);
+        //        WhiteSet.set(68);
+        //        WhiteSet.set(80);
+        //        WhiteSet.set(92);
+        //        WhiteSet.set(93);
+        //        WhiteSet.set(94);
+        //        WhiteSet.set(83);
+        //        WhiteSet.set(71);
+        //        WhiteSet.set(59);
+        //        WhiteSet.set(48);
+        //        //starts in top right
+        //        BlackSet.set(108);
+        //        BlackSet.set(97);
+        //        BlackSet.set(86);
+        //        BlackSet.set(75);
+        //        BlackSet.set(64);
+        //        BlackSet.set(52);
+        //        BlackSet.set(40);
+        //        BlackSet.set(28);
+        //        BlackSet.set(27);
+        //        BlackSet.set(26);
+        //        BlackSet.set(37);
+        //        BlackSet.set(49);
+        //        BlackSet.set(61);
+        //        BlackSet.set(72);
+        //    }
+        //    //Wall layout
+        //    if (BoardLayout == 3)
+        //    {
+        //        //top left
+        //        BlackSet.set(28);
+        //        BlackSet.set(39);
+        //        BlackSet.set(50, 52);
+        //        BlackSet.set(61, 63);
+        //        BlackSet.set(72, 74);
+        //        BlackSet.set(83, 85);
+        //        BlackSet.set(94, 96);
+        //        BlackSet.set(105);
+        //        BlackSet.set(86);
+        //        //bottom left
+        //        WhiteSet.set(15);
+        //        WhiteSet.set(25, 27);
+        //        WhiteSet.set(36, 38);
+        //        WhiteSet.set(47, 49);
+        //        WhiteSet.set(58, 60);
+        //        WhiteSet.set(69, 71);
+        //        WhiteSet.set(81);
+        //        WhiteSet.set(92);
+        //        WhiteSet.set(34);
+        //    }
+        //    //all board is bkack
+        //    if (BoardLayout == 4)
+        //    {
+        //        BlackSet.set(12, 17);
+        //        BlackSet.set(23, 29);
+        //        BlackSet.set(34, 41);
+        //        BlackSet.set(45, 53);
+        //        BlackSet.set(56, 65);
+        //        BlackSet.set(68, 76);
+        //        BlackSet.set(80, 87);
+        //        BlackSet.set(92, 98);
+        //        BlackSet.set(104, 109);
+        //    }
+        //}
+
         public void initializeBoard(int BoardLayout)
         {
             initpathArr();
@@ -95,25 +224,25 @@ namespace AbaloneGame.model
             BlackSet = new BitSet(121);
             ///board edges layout.
             EdgeOfBoard.set(12, 17);
-            EdgeOfBoard.set(23, 30);
-            EdgeOfBoard.set(34, 42);
-            EdgeOfBoard.set(45, 54);
-            EdgeOfBoard.set(56, 66);
-            EdgeOfBoard.set(68, 77);
-            EdgeOfBoard.set(80, 88);
-            EdgeOfBoard.set(92, 99);
-            EdgeOfBoard.set(104, 110);
+            EdgeOfBoard.set(23, 29);
+            EdgeOfBoard.set(34, 41);
+            EdgeOfBoard.set(45, 53);
+            EdgeOfBoard.set(56, 65);
+            EdgeOfBoard.set(68, 76);
+            EdgeOfBoard.set(80, 87);
+            EdgeOfBoard.set(92, 98);
+            EdgeOfBoard.set(104, 109);
             //classic layout
             if (BoardLayout == 0)
             {
-                ///whiteSet, player 1
+                ///blueSet, player 1
                 WhiteSet.set(12, 14);
                 WhiteSet.set(23, 25);
                 WhiteSet.set(34, 37);
                 WhiteSet.set(45, 48);
                 WhiteSet.set(56, 59);
                 WhiteSet.set(68);
-                //Blackset, player -1
+                //Redset, player -1
                 BlackSet.set(52);
                 BlackSet.set(62, 65);
                 BlackSet.set(73, 76);
@@ -199,20 +328,8 @@ namespace AbaloneGame.model
                 WhiteSet.set(92);
                 WhiteSet.set(34);
             }
-            //all board is bkack
-            if (BoardLayout == 4)
-            {
-                BlackSet.set(12, 17);
-                BlackSet.set(23, 29);
-                BlackSet.set(34, 41);
-                BlackSet.set(45, 53);
-                BlackSet.set(56, 65);
-                BlackSet.set(68, 76);
-                BlackSet.set(80, 87);
-                BlackSet.set(92, 98);
-                BlackSet.set(104, 109);
-            }
         }
+
 
         /**
         * function return the value of position in board.
