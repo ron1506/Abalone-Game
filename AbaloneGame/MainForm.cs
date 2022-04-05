@@ -15,8 +15,10 @@ namespace AbaloneGame
     public partial class MainForm : Form
     {
         GameManager gm;
+        private bool isPvP;
+        private int layout;
         //PlayerTurnManager tm;
-        public MainForm()
+        public MainForm(bool isPvP, int layout)
         {
             gm = new GameManager();
             gm.StartGamePlayerVsPlayer(0);

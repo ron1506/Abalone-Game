@@ -9,3 +9,4 @@ C:\ron omega\finalprojectRonAizen\Abalone-Game\AbaloneGame\bin\Debug\AbaloneGame
 C:\ron omega\finalprojectRonAizen\Abalone-Game\AbaloneGame\obj\Debug\AbaloneGame.exe
 C:\ron omega\finalprojectRonAizen\Abalone-Game\AbaloneGame\obj\Debug\AbaloneGame.pdb
 C:\ron omega\finalprojectRonAizen\Abalone-Game\AbaloneGame\obj\Debug\AbaloneGame.OpenForm.resources
+C:\ron omega\finalprojectRonAizen\Abalone-Game\AbaloneGame\obj\Debug\AbaloneGame.ChooseLayoutForm.resources

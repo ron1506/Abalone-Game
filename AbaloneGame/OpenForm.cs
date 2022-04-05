@@ -26,7 +26,9 @@ namespace AbaloneGame
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-
+            ChooseLayoutForm clf = new ChooseLayoutForm(true);
+            this.Hide();
+            clf.Show();
         }
         /// <summary>
         /// AI Game Button
@@ -35,7 +37,9 @@ namespace AbaloneGame
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-
+            ChooseLayoutForm clf = new ChooseLayoutForm(false);
+            this.Hide();
+            clf.Show();
         }
     }
 }
