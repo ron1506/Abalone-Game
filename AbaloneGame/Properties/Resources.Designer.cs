@@ -73,6 +73,16 @@ namespace AbaloneGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap open_form_picture {
+            get {
+                object obj = ResourceManager.GetObject("open_form_picture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap scoreBox {
             get {
                 object obj = ResourceManager.GetObject("scoreBox", resourceCulture);

@@ -215,29 +215,10 @@ namespace AbaloneGame.model
         }
 
         /**
-        * program sends to server end point all of the positions in the current board.
-        * @param point - sends messages to.
-        */
-        //public void sendIntireBoardToClient(serverEndPoint point)
-        //{
-        //    for (int i = EdgeOfBoard.nextSetBit(0); i != -1; i = EdgeOfBoard.nextSetBit(i + 1))
-        //    {
-        //        point.sendmessage(i, 0);
-        //    }
-        //    for (int i = WhiteSet.nextSetBit(0); i != -1; i = WhiteSet.nextSetBit(i + 1))
-        //    {
-        //        point.sendmessage(i, 1);
-        //    }
-        //    for (int i = BlackSet.nextSetBit(0); i != -1; i = BlackSet.nextSetBit(i + 1))
-        //    {
-        //        point.sendmessage(i, -1);
-        //    }
-        //}
-        /**
         * function return the value of position in board.
         * @param position - position to check value for.
         * @return - -9 if not in board, 1 if in whiteset, -1 if in blackset ,0 if not pressed (not in both).
-*/
+        */
         //function gets bit position and return 1 if in whiteset,
         //-1 if in blackset and 0 if not pressed (not in both).
         //return -9 if not in board.

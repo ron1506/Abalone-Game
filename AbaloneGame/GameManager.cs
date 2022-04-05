@@ -67,7 +67,6 @@ namespace AbaloneGame
         {
             if (isPVP == true)
             {
-                Console.WriteLine("swithced player from " + currentplayer + "to " + currentplayer * -1);
                 currentplayer = currentplayer * -1;
             }
             //else
@@ -119,6 +118,10 @@ namespace AbaloneGame
                 return 0;
             }
             return 0;
+        }
+        public int getCurrentPlayer()
+        {
+            return currentplayer;
         }
 
         public string PlayerTurn()

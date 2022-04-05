@@ -19,7 +19,7 @@ namespace AbaloneGame
         public MainForm()
         {
             gm = new GameManager();
-            gm.StartGamePlayerVsPlayer(1);
+            gm.StartGamePlayerVsPlayer(0);
             GraphicsManager.init_dictionary();
             InitializeComponent();
         }
@@ -32,12 +32,12 @@ namespace AbaloneGame
         {
             GraphicsManager.PaintBoard(e.Graphics, gm.Board);
             label3.Text = gm.PlayerTurn() + " Player turn.";
-            
+            //label4.Text = "Choose the board layout.";
         }
 
         private void pictureBox1_onClick(object sender, MouseEventArgs e)
         {
-            int index = GraphicsManager.Choose_Player(pictureBox1.CreateGraphics(), e.X, e.Y);
+            int index = GraphicsManager.Choose_Player(pictureBox1.CreateGraphics(), e.X, e.Y, gm.getCurrentPlayer(), gm.Board);
             int state = gm.rereceivedMessage(index);
             if (state == 1 || state == 2)
             {

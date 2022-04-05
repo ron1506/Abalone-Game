@@ -37,7 +37,7 @@ namespace AbaloneGame
         * @param index - pressed button index
         * @param currentplayer - who pressed.
         * @return Move if end of a valid turn , null if not.
-*/
+        */
         public Move recivedPress(sbyte index, int currentplayer)
         {
             //first press
@@ -58,7 +58,7 @@ namespace AbaloneGame
         * @param index - pressed button index
         * @param currentplayer - who pressed.
         * @return Move if end of a valid turn , null if not.
-*/
+        */
         private Move CaseNotFirstPress(sbyte index, int currentplayer)
         {
             int CurrentPressValue = board.GetValueInPosition(index);
@@ -76,15 +76,14 @@ namespace AbaloneGame
                     }
                     else
                     {
-                        CancleTurn(currentplayer); // not close both presses.
+                        CancelTurn(currentplayer); // not close both presses.
                         return null;
                     }
                 }
                 else
                 {//can be 3rd press with same color
                  //checks if positions are in line and it is the 3rd press.
-                    if (pressedbuttons[2] == -1 && board.isPositionsInLine3(pressedbuttons[0],
-                    pressedbuttons[1], index))
+                    if (pressedbuttons[2] == -1 && board.isPositionsInLine3(pressedbuttons[0], pressedbuttons[1], index))
                     {
                         //legal 3rd press in line same own color.
                         pressedbuttons[2] = index;
@@ -93,7 +92,7 @@ namespace AbaloneGame
                     else
                     {
                         //4 presses with same color
-                        CancleTurn(currentplayer);
+                        CancelTurn(currentplayer);
                         return null;
                     }
                 }
@@ -119,18 +118,16 @@ namespace AbaloneGame
             if (pressedbuttons[1] == -1)
             {
                 //check if close to each other and target position empty
-                if (board.IsPositionsTogether(pressedbuttons[0], index) &&
-                board.GetValueInPosition(index) == 0)
+                if (board.IsPositionsTogether(pressedbuttons[0], index) && board.GetValueInPosition(index) == 0)
                 {
                     m = new Move();
                     m.new1BallMove(pressedbuttons[0], index);
                     emptyArr();
-                    Console.WriteLine("1ballmove");
                     return m;
                 }
                 else
                 {
-                    CancleTurn(currentplayer);
+                    CancelTurn(currentplayer);
                     return null;
                 }
             }
@@ -143,7 +140,7 @@ namespace AbaloneGame
                     //if null than not a valid push.
                     if (m == null)
                     {
-                        CancleTurn(currentplayer);
+                        CancelTurn(currentplayer);
                         return null;
                     }
                     //is a valid move.
@@ -154,7 +151,7 @@ namespace AbaloneGame
                 m = board.TryToSideMove2(pressedbuttons[0], pressedbuttons[1], index);
                 if (m == null)
                 {
-                    CancleTurn(currentplayer);
+                    CancelTurn(currentplayer);
                     return null;
                 }
                 emptyArr();
@@ -166,7 +163,7 @@ namespace AbaloneGame
                 m = board.TryToPush3(pressedbuttons[0], pressedbuttons[1], pressedbuttons[2], index);
                 if (m == null)
                 {
-                    CancleTurn(currentplayer);
+                    CancelTurn(currentplayer);
                     return null;
                 }
                 emptyArr();
@@ -177,7 +174,7 @@ namespace AbaloneGame
                 m = board.TryToSideMove3(pressedbuttons[0], pressedbuttons[1], pressedbuttons[2], index);
                 if (m == null)
                 {
-                    CancleTurn(currentplayer);
+                    CancelTurn(currentplayer);
                     return null;
                 }
                 emptyArr();
@@ -189,9 +186,8 @@ namespace AbaloneGame
         * program sends messages to client to reset pressed colors there too.
         * @param currentplayer - current player.
 */
-        private void CancleTurn(int currentplayer)
+        private void CancelTurn(int currentplayer)
         {
-            Console.WriteLine("reached cancle turn");
             if (pressedbuttons[0] != -1)
             {
                 //reset array

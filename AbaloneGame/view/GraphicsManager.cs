@@ -11,15 +11,11 @@ namespace AbaloneGame.view
 {
     class GraphicsManager
     {
-        //private const float IMG_SIZE_WIDTH = 519;
-        //private const float IMG_SIZE_LENGTH = 451;
-        //private const float MIDDLE_CELL_X = IMG_SIZE_WIDTH / 2;
-        //private const float MIDDLE_CELL_Y = IMG_SIZE_LENGTH / 2;
-        //private const int MIDDLE_CELL_INDEX = 60;
         private const int RADIUS = 53;
-        //private const float DISTANCE_BETWEEN_CIRCLES = 3;
-        //private float[] PACES = { DISTANCE_BETWEEN_CIRCLES / 2 + RADIUS, DISTANCE_BETWEEN_CIRCLES + 2 * RADIUS };
         private static Dictionary<int, int[]> index_to_position = new Dictionary<int, int[]>();
+        /// <summary>
+        /// initializing the dictionary that contains the cordinates of every tile in the board.
+        /// </summary>
         public static void init_dictionary()
         {
             index_to_position.Add(12, new int[2] { 170, 448 });
@@ -116,18 +112,28 @@ namespace AbaloneGame.view
                 }
             }
         }
-        public static int Choose_Player(Graphics g, int x, int y)
+        /// <summary>
+        /// the function draws a circle around the chosen players to move.
+        /// </summary>
+        /// <param name="g">graphics</param>
+        /// <param name="x">the x coordinate </param>
+        /// <param name="y">the y coordinate</param>
+        /// <param name="currentplayer">the player who's turn is.</param>
+        /// <param name="board">the game board.</param>
+        /// <returns></returns>
+        public static int Choose_Player(Graphics g, int x, int y, int currentplayer, Board board)
         {
             int centerX = 0, centerY = 0;
             Pen pen = new Pen(Brushes.Blue);
             pen.Width = 2.5F;
-            foreach (int[] center in index_to_position.Values)
+            foreach (int key in index_to_position.Keys)
             {
-                if (Math.Sqrt(Math.Pow(center[0] - x - 25, 2) + Math.Pow(center[1] - y - 25, 2)) < RADIUS - 28) //in the circle
+                if (Math.Sqrt(Math.Pow(index_to_position[key][0] - x - 25, 2) + Math.Pow(index_to_position[key][1] - y - 25, 2)) < RADIUS - 28) //in the circle
                 {
-                    g.DrawEllipse(pen, center[0] - RADIUS, center[1] - RADIUS, RADIUS, RADIUS);
-                    centerX = center[0];
-                    centerY = center[1];
+                    if (currentplayer == board.GetValueInPosition((sbyte)key)) // if from the same color than circlr it with blue circle
+                        g.DrawEllipse(pen, index_to_position[key][0] - RADIUS, index_to_position[key][1] - RADIUS, RADIUS, RADIUS);
+                    centerX = index_to_position[key][0];
+                    centerY = index_to_position[key][1];
                 }
             }
             foreach (int key in index_to_position.Keys)
