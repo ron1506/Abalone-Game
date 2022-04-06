@@ -15,8 +15,8 @@ namespace AbaloneGame
     public partial class MainForm : Form
     {
         GameManager gm;
-        private bool isPvP;
-        private int layout;
+        //private bool isPvP;
+        //private int layout;
         //PlayerTurnManager tm;
         public MainForm(bool isPvP, int layout)
         {
@@ -26,6 +26,7 @@ namespace AbaloneGame
             else
             {
                 //AI
+                gm.StartGamePlayerVsAI(layout);
             }
             GraphicsManager.init_dictionary();
             InitializeComponent();

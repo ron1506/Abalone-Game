@@ -19,7 +19,7 @@ namespace AbaloneGame
         }
         /**
         * program initializes pressedbuttons array.
-*/
+        */
         private void resetMiniDataStruct()
         {
             pressedbuttons = new sbyte[6];
@@ -43,14 +43,14 @@ namespace AbaloneGame
             //first press
             if (pressedbuttons[0] == -1)
             {
-                //own ball press
                 if (board.GetValueInPosition(index) == currentplayer)
-                {
+                {//own ball press
                     pressedbuttons[0] = index;
                     //finished click and in middle of turn.
                     return null;
                 }
             }
+            // DataStructure is not empty
             return CaseNotFirstPress(index, currentplayer);
         }
         /**
@@ -109,7 +109,7 @@ namespace AbaloneGame
         * @param index - pressed button index
         * @param currentplayer - who pressed.
         * @return Move if end of a valid turn , null if not.
-*/
+        */
         private Move CaseLastPressInTurn(sbyte index, int currentplayer)
         {
             //Move to fillin and return.
@@ -185,7 +185,7 @@ namespace AbaloneGame
         * program resets the pressedbuttons array.
         * program sends messages to client to reset pressed colors there too.
         * @param currentplayer - current player.
-*/
+        */
         private void CancelTurn(int currentplayer)
         {
             if (pressedbuttons[0] != -1)
@@ -206,7 +206,7 @@ namespace AbaloneGame
         }
         /**
         * program resets pressedbuttons array. (usually after a valid move has found)
-*/
+        */
         private void emptyArr()
         {
             Console.WriteLine("reached empty arr");

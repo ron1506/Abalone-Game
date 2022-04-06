@@ -25,18 +25,17 @@ namespace AbaloneGame
         /**
         * Constructor.
         * @param point - server end point
-*/
+        */
         public GameManager()
         {
             this.currentplayer = 1;
             this.board = new Board();
-            //this.board.initializeBoard(0);
         }
         /**
         * the program get called once the client pressed the start game button.
         * the program initializes the board and sends messeges of the board to the client.
         * @param BoardLayout - the game layout.
-*/
+        */
         public void StartGamePlayerVsPlayer(int BoardLayout)
         {
             //init the board values
@@ -47,10 +46,10 @@ namespace AbaloneGame
             isWaitingToPlayer = true;
         }
         /**
-* program gets called when client presses "start game player vs AI"
-* program initialize required parts in code.
-* @param BoardLayout - the game layout.
-*/
+        * program gets called when client presses "start game player vs AI"
+        * program initialize required parts in code.
+        * @param BoardLayout - the game layout.
+        */
         public void StartGamePlayerVsAI(int BoardLayout)
         {
             board.initializeBoard(BoardLayout);
@@ -62,7 +61,7 @@ namespace AbaloneGame
         /**
         * program switches beetween players/AI.
         * If the game mode is pvAI than its activates the ai.
-*/
+        */
         private void switchPlayers()
         {
             if (isPVP == true)
@@ -70,19 +69,19 @@ namespace AbaloneGame
                 currentplayer = currentplayer * -1;
             }
             //else
-            //{
+            //{//AI
             //    //switch to player -> AI -> AI or AI-> player
             //    //1 is player
             //    if (currentplayer == 1)
             //    {
             //        //switch from player to AI
-            //        Console.WriteLine("swithced player from " + currentplayer + " to AI turn as " + currentplayer * -1);
             //        isWaitingToPlayer = false;
+            //
             //        //gets move from AI
-            //        //Move AIMove = AI.playTurn(board, currentplayer * -1);
-            //        //mark move to client
+            //        Move AIMove = AI.playTurn(board, currentplayer * -1);
+            //
             //        // implementing move in game board
-            //        //int iswin = board.makeMove(AIMove);
+            //        int iswin = board.makeMove(AIMove);
             //    }
             //    if (iswin == 1)
             //        this.WinFound(currentplayer * -1);
