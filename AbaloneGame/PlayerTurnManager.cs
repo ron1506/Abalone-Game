@@ -1,9 +1,12 @@
 ﻿using AbaloneGame.model;
+using AbaloneGame.view;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AbaloneGame
 {
@@ -38,7 +41,7 @@ namespace AbaloneGame
         * @param currentplayer - who pressed.
         * @return Move if end of a valid turn , null if not.
         */
-        public Move recivedPress(sbyte index, int currentplayer)
+        public Move recivedPress(sbyte index, int currentplayer, PictureBox pictureBox)
         {
             //first press
             if (pressedbuttons[0] == -1)
@@ -51,7 +54,7 @@ namespace AbaloneGame
                 }
             }
             // DataStructure is not empty
-            return CaseNotFirstPress(index, currentplayer);
+            return CaseNotFirstPress(index, currentplayer, pictureBox);
         }
         /**
         * program checks if it is a false press, second /third/ 4th press and if it is the last press in turn.
@@ -59,7 +62,7 @@ namespace AbaloneGame
         * @param currentplayer - who pressed.
         * @return Move if end of a valid turn , null if not.
         */
-        private Move CaseNotFirstPress(sbyte index, int currentplayer)
+        private Move CaseNotFirstPress(sbyte index, int currentplayer, PictureBox pictureBox)
         {
             int CurrentPressValue = board.GetValueInPosition(index);
             if (CurrentPressValue == currentplayer)
@@ -76,7 +79,7 @@ namespace AbaloneGame
                     }
                     else
                     {
-                        CancelTurn(currentplayer); // not close both presses.
+                        CancelTurn(currentplayer, pictureBox); // not close both presses.
                         return null;
                     }
                 }
@@ -92,7 +95,7 @@ namespace AbaloneGame
                     else
                     {
                         //4 presses with same color
-                        CancelTurn(currentplayer);
+                        CancelTurn(currentplayer, pictureBox);
                         return null;
                     }
                 }
@@ -100,7 +103,7 @@ namespace AbaloneGame
             else
             {// not own ball pressed in 2/3/4 press.
              //ball pressed (not first turn) is not own color
-                return CaseLastPressInTurn(index, currentplayer);
+                return CaseLastPressInTurn(index, currentplayer, pictureBox);
             }
         }
         /**
@@ -110,7 +113,7 @@ namespace AbaloneGame
         * @param currentplayer - who pressed.
         * @return Move if end of a valid turn , null if not.
         */
-        private Move CaseLastPressInTurn(sbyte index, int currentplayer)
+        private Move CaseLastPressInTurn(sbyte index, int currentplayer, PictureBox pictureBox)
         {
             //Move to fillin and return.
             Move m = null;
@@ -127,7 +130,7 @@ namespace AbaloneGame
                 }
                 else
                 {
-                    CancelTurn(currentplayer);
+                    CancelTurn(currentplayer, pictureBox);
                     return null;
                 }
             }
@@ -140,7 +143,7 @@ namespace AbaloneGame
                     //if null than not a valid push.
                     if (m == null)
                     {
-                        CancelTurn(currentplayer);
+                        CancelTurn(currentplayer, pictureBox);
                         return null;
                     }
                     //is a valid move.
@@ -151,7 +154,7 @@ namespace AbaloneGame
                 m = board.TryToSideMove2(pressedbuttons[0], pressedbuttons[1], index);
                 if (m == null)
                 {
-                    CancelTurn(currentplayer);
+                    CancelTurn(currentplayer, pictureBox);
                     return null;
                 }
                 emptyArr();
@@ -163,7 +166,7 @@ namespace AbaloneGame
                 m = board.TryToPush3(pressedbuttons[0], pressedbuttons[1], pressedbuttons[2], index);
                 if (m == null)
                 {
-                    CancelTurn(currentplayer);
+                    CancelTurn(currentplayer, pictureBox);
                     return null;
                 }
                 emptyArr();
@@ -174,7 +177,7 @@ namespace AbaloneGame
                 m = board.TryToSideMove3(pressedbuttons[0], pressedbuttons[1], pressedbuttons[2], index);
                 if (m == null)
                 {
-                    CancelTurn(currentplayer);
+                    CancelTurn(currentplayer, pictureBox);
                     return null;
                 }
                 emptyArr();
@@ -186,8 +189,10 @@ namespace AbaloneGame
         * program sends messages to client to reset pressed colors there too.
         * @param currentplayer - current player.
         */
-        private void CancelTurn(int currentplayer)
+        private void CancelTurn(int currentplayer, PictureBox pictureBox)
         {
+            MessageBox.Show("Invalid Move");
+            pictureBox.Invalidate();
             if (pressedbuttons[0] != -1)
             {
                 //reset array

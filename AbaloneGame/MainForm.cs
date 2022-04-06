@@ -44,8 +44,9 @@ namespace AbaloneGame
 
         private void pictureBox1_onClick(object sender, MouseEventArgs e)
         {
-            int index = GraphicsManager.Choose_Player(pictureBox1.CreateGraphics(), e.X, e.Y, gm.getCurrentPlayer(), gm.Board);
-            int state = gm.rereceivedMessage(index);
+            Graphics g = pictureBox1.CreateGraphics();
+            int index = GraphicsManager.Choose_Player(g, e.X, e.Y, gm.getCurrentPlayer(), gm.Board);
+            int state = gm.rereceivedMessage(index, pictureBox1);
             if (state == 1 || state == 2)
             {
                 pictureBox1.Invalidate();
@@ -55,7 +56,6 @@ namespace AbaloneGame
             if (gm.isGameOver())
             {
                 MessageBox.Show("Game is over " + gm.PlayerTurn() + " won.");
-
             }
         }
 

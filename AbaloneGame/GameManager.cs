@@ -1,9 +1,11 @@
 ﻿using AbaloneGame.model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AbaloneGame
 {
@@ -95,13 +97,13 @@ namespace AbaloneGame
         * if it is not end of turn than move = null.
         * @param index - client press index.
         */
-        public int rereceivedMessage(int index)
+        public int rereceivedMessage(int index, PictureBox pictureBox)
         {
             int iswin = 0;
             if (isWaitingToPlayer)
             {
                 //manages the player turn input.
-                Move move = Pturn.recivedPress((sbyte)index, currentplayer);
+                Move move = Pturn.recivedPress((sbyte)index, currentplayer, pictureBox);
                 if (move != null)
                 {
                     //implements the move inside the board.
