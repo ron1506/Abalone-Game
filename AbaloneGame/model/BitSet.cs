@@ -58,5 +58,15 @@ namespace AbaloneGame.model
                 throw new IndexOutOfRangeException();
             bits[bitIndex] = value;
         }
+        public BitSet clone()
+        {
+            BitSet clonedBitSet = new BitSet(Length);
+            for (int i = 0; i < Length; i++)
+            {
+                if (get(i))
+                    clonedBitSet.set(i);
+            }
+            return clonedBitSet;
+        }
     }
 }

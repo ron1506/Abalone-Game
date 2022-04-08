@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -536,6 +537,150 @@ namespace AbaloneGame.model
             Move mov = new Move();
             mov.new3BallsSideMove(posA, posB, posC, posSideA, posSideB, posSideC);
             return mov;
+        }
+
+        //////////////////////////////////////////// AI Functions///////////////////////////////////////////////////
+        /**
+        * program finds all the possible moves of Currentplayer from current board.
+        * @param currentPlayer - player to search moves for.
+        * @return list of all possible moves of current player.
+        */
+        public ArrayList getmoves(sbyte currentPlayer)
+        {
+            ArrayList MoveList = new ArrayList(60);
+            Move move = new Move();
+            sbyte[] possiblePoisitionsArray;
+            sbyte[] sideArray;
+            //set own and enemy sets
+            BitSet ownSet = (currentPlayer == 1) ? WhiteSet : BlackSet;
+            //go ovet all balls in bitset to put as first click.
+            for (sbyte posA = (sbyte)ownSet.nextSetBit(0); posA != -1; posA = (sbyte)ownSet.nextSetBit(posA + 1))
+            {
+                //gets all neighbors positions.
+                possiblePoisitionsArray = getNeighborsOfPossition(posA);
+                /// go over each of neighbors positions in posB.
+                foreach (sbyte posB in possiblePoisitionsArray)
+                {
+                    //if position is not a valid neighbor.
+                    if (posB == -1)
+                        continue;
+                    //checks if posB is Empty
+                    sbyte VposB = GetValueInPosition(posB);
+                    if (VposB == 0)
+                    {
+                        //add 2 points, 1 of own, 0 push, 0 score
+                        move = new Move();
+                        move.new1BallMove(posA, posB);
+                        //adds move to list
+                        MoveList.Add(move);
+                    }
+                    else
+                    {//posB is not empty
+                     //if enemy then cannot push (move already checked) then break.
+                        if (VposB == currentPlayer * -1) continue;
+                        //next postition in line, return -1 if not in board
+                        sbyte posC = getNextPositionInLine(posA, posB);
+                        if (posC != -9)
+                        {//posC is inBoard.
+                            if (GetValueInPosition(posC) == currentPlayer)
+                            {
+                                sbyte posD = getNextPositionInLine(posB, posC);
+                                if (posD != -9)
+                                {
+                                    move = new Move();
+                                    move = TryToPush3(posA, posB, posC, posD);
+                                    if (move != null)
+                                        MoveList.Add(move);
+                                }
+                            }
+                            else
+                            {//can be 2 own push.
+                                move = new Move();
+                                move = TryToPush2(posA, posB, posC);
+                                if (move != null)
+                                    MoveList.Add(move);
+                            }
+                        }
+                        //to check all possible side moves of 2 balls.
+                        sideArray = getNeighborsOfPossition(posB);
+                        /// go over each of neighbors positions from posB.
+                        foreach(sbyte posSideB in sideArray)
+                        {
+                            //if position is not a valid neighbor.
+                            if (posSideB == -1)
+                                continue;
+                            //doesnt check posA (already pressed) or posC (already checked in line move).
+                            if (posSideB == posA || posSideB == posB)
+                                continue;
+                            if (GetValueInPosition(posSideB) != 0)
+                                continue;
+                            //gets posSideA index, if not in board then -1.
+                            sbyte posSideA = get4thPosInSideMove(posA, posB, posSideB);
+                            if (posSideA == -9 || GetValueInPosition(posSideA) != 0)
+                                continue;
+                            //if reached then it is a sideMove in positions posA, posB to posSideA and posSideB
+                            //
+                            move = new Move();
+                            move.new2BallsSideMove(posA, posB, posSideA, posSideB);
+                            MoveList.Add(move);
+                            //3 SIDE MOVE
+                            //checks if the next position in posC and posSideC are empty.
+                            sbyte posCC = getNextPositionInLine(posA, posB);
+                            if (posC != VposB)
+                                continue;
+                            sbyte posSideC = getNextPositionInLine(posSideA, posSideB);
+                            if (posSideC == -9)
+                                continue;
+                            //checks if both posC and sideC are empty
+                            if (GetValueInPosition(posCC) == 0 && GetValueInPosition(posSideC) == 0)
+                            {//3 balls side move.
+                                move = new Move();
+                                move.new3BallsSideMove(posA, posB, posCC, posSideA, posSideB, posSideC);
+                                MoveList.Add(move);
+                            }
+                        }
+                    }
+                }
+            }
+            return MoveList;
+        }
+        /*
+        * program returns a byte arr of all positions next to the given position.
+        * if position is not in board than it is -1.
+        */
+        /**
+        * program creates a bute array of all positions next to a given position.
+        * if a positions is not in board, its -1 in the array.
+        * @param position - position to creates neighbors array
+        * @return byte array of neighbors , -1 for each one is out of board.
+        */
+        public sbyte[] getNeighborsOfPossition(sbyte position)
+        {
+            sbyte pos;
+            sbyte[] arr = new sbyte[6];
+            for (byte i = 0; i < 6; i++)
+            {
+                //neighbor position
+                pos = (sbyte)(position + pathArr[i]);
+                if (isPositionInBoard(pos))
+                    arr[i] = pos;
+                else
+                    arr[i] = -1;
+            }
+            return arr;
+        }
+        /**
+        * program gets a board instance and sets current (this) board the values of the given board.
+        * @param b - board to clone
+        */
+        public void cloneBoard(Board b)
+        {
+            this.WhiteSet = (BitSet)b.WhiteSet.clone();
+            this.BlackSet = (BitSet)b.BlackSet.clone();
+            //to find a better way for edge of board
+            this.EdgeOfBoard = (BitSet)b.EdgeOfBoard.clone();
+            this.scoreWhite = b.scoreWhite;
+            this.scoreBlack = b.scoreBlack;
         }
     }
 }

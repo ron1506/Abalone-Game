@@ -48,7 +48,7 @@ namespace AbaloneGame
             int index = GraphicsManager.Choose_Player(g, e.X, e.Y, gm.getCurrentPlayer(), gm.Board);
             int state = gm.rereceivedMessage(index, pictureBox1);
             if (state == 1 || state == 2)
-            {
+            {//a move was played
                 pictureBox1.Invalidate();
                 label1.Text = gm.Board.getScoreBlack().ToString();
                 label2.Text = gm.Board.getScoreWhite().ToString();

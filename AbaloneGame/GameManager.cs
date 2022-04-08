@@ -1,4 +1,5 @@
 ﻿using AbaloneGame.model;
+using AbaloneGame.view;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,7 +20,7 @@ namespace AbaloneGame
         //player (client) turn manager
         private PlayerTurnManager Pturn;
         //AI manager
-        //private AIManager AI;
+        private AIManager AI;
         //game mode
         bool isPVP;
         //is waiting for user input.
@@ -57,38 +58,42 @@ namespace AbaloneGame
             board.initializeBoard(BoardLayout);
             Pturn = new PlayerTurnManager(board);
             isPVP = false;
-            //AI = new AIManager(-1);
+            AI = new AIManager(-1);
             isWaitingToPlayer = true;
         }
         /**
         * program switches beetween players/AI.
         * If the game mode is pvAI than its activates the ai.
         */
-        private void switchPlayers()
+        private int switchPlayers()
         {
+            int iswin = 0;
             if (isPVP == true)
             {
                 currentplayer = currentplayer * -1;
+                return 0;
             }
-            //else
-            //{//AI
-            //    //switch to player -> AI -> AI or AI-> player
-            //    //1 is player
-            //    if (currentplayer == 1)
-            //    {
-            //        //switch from player to AI
-            //        isWaitingToPlayer = false;
-            //
-            //        //gets move from AI
-            //        Move AIMove = AI.playTurn(board, currentplayer * -1);
-            //
-            //        // implementing move in game board
-            //        int iswin = board.makeMove(AIMove);
-            //    }
-            //    if (iswin == 1)
-            //        this.WinFound(currentplayer * -1);
-            //    isWaitingToPlayer = true;
-            //}
+            else
+            {//AI
+                //switch to player -> AI -> AI or AI-> player
+                //1 is player
+                if (currentplayer == 1)
+                {
+                    //switch from player to AI
+                    isWaitingToPlayer = false;
+
+                    //gets move from AI
+                    Move AIMove = AI.playTurn(board, currentplayer * -1);
+
+                    // implementing move in game board
+                    iswin = board.makeMove(AIMove);
+                }
+                if (iswin == 1)
+                    return iswin;
+                    //this.WinFound(currentplayer * -1);
+                isWaitingToPlayer = true;
+                return iswin;
+            }
             //after turn has been committed, its player turn again.
         }
         /**
@@ -108,11 +113,14 @@ namespace AbaloneGame
                 {
                     //implements the move inside the board.
                     iswin = board.makeMove(move);
+                    pictureBox.Invalidate();
+                    //GraphicsManager.PaintBoard(pictureBox.CreateGraphics(), board);
                     if (iswin == 1)
                         return 2; // there was a move and a win.
                     else
                     {
-                        switchPlayers();
+                        if (switchPlayers() == 1)
+                            return 2; // there was a move and there was a win
                         return 1; // there was a move but no win.
                     }
                 }
