@@ -99,22 +99,20 @@ namespace AbaloneGame.view
         public static void PaintBoard(Graphics g, Board board)
         {
             for (int i = 0; i < 121; i++)
-            {
+            { // for each bit in the 121 bits in the BitSet.
                 if (board.getEdgeOfBoard().get(i))
-                {
+                { //in the board
                     if (board.getBlackSet().get(i))
-                    {
-                        //draw the circle.
+                    {//draw the circle black.
                         g.FillEllipse(Brushes.Black, (float)(index_to_position[i][0] - RADIUS), (float)(index_to_position[i][1] - RADIUS), RADIUS, RADIUS);
                     }
                     else if (board.getWhiteSet().get(i))
-                    {
-                        //draw the circle.
+                    {//draw the circle white.
                         g.FillEllipse(Brushes.White, (float)(index_to_position[i][0] - RADIUS), (float)(index_to_position[i][1] - RADIUS), RADIUS, RADIUS);
                     }
                     else
-                    {
-                        continue;
+                    { //empty
+                        //g.FillEllipse(Brushes.Red, (float)(index_to_position[i][0] - RADIUS), (float)(index_to_position[i][1] - RADIUS), RADIUS, RADIUS);
                     }
                 }
             }

@@ -65,7 +65,7 @@ namespace AbaloneGame
         * program switches beetween players/AI.
         * If the game mode is pvAI than its activates the ai.
         */
-        private int switchPlayers()
+        public int switchPlayers(Label label)
         {
             int iswin = 0;
             if (isPVP == true)
@@ -82,11 +82,17 @@ namespace AbaloneGame
                     //switch from player to AI
                     isWaitingToPlayer = false;
 
+                    //switch player 
+                    currentplayer = currentplayer * -1;
+                    label.Text = PlayerTurn() + " Player turn.";
+                    label.Refresh();
+                    
                     //gets move from AI
-                    Move AIMove = AI.playTurn(board, currentplayer * -1);
+                    Move AIMove = AI.playTurn(board, currentplayer);
 
                     // implementing move in game board
                     iswin = board.makeMove(AIMove);
+                    currentplayer = currentplayer * -1;
                 }
                 if (iswin == 1)
                     return iswin;
@@ -102,8 +108,9 @@ namespace AbaloneGame
         * if it is not end of turn than move = null.
         * @param index - client press index.
         */
-        public int rereceivedMessage(int index, PictureBox pictureBox)
+        public int rereceivedMessage(int index, PictureBox pictureBox, Label label)
         {
+            Graphics g = pictureBox.CreateGraphics();
             int iswin = 0;
             if (isWaitingToPlayer)
             {
@@ -113,13 +120,15 @@ namespace AbaloneGame
                 {
                     //implements the move inside the board.
                     iswin = board.makeMove(move);
-                    pictureBox.Invalidate();
-                    //GraphicsManager.PaintBoard(pictureBox.CreateGraphics(), board);
+                    /*GraphicsManager.PaintBoard(g, this.Board);
+                    pictureBox.Invalidate();*/
+                    pictureBox.Refresh();
+                    //label.Refresh();
                     if (iswin == 1)
                         return 2; // there was a move and a win.
                     else
                     {
-                        if (switchPlayers() == 1)
+                        if (switchPlayers(label) == 1)
                             return 2; // there was a move and there was a win
                         return 1; // there was a move but no win.
                     }

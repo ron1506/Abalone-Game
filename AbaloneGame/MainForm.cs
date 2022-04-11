@@ -46,7 +46,7 @@ namespace AbaloneGame
         {
             Graphics g = pictureBox1.CreateGraphics();
             int index = GraphicsManager.Choose_Player(g, e.X, e.Y, gm.getCurrentPlayer(), gm.Board);
-            int state = gm.rereceivedMessage(index, pictureBox1);
+            int state = gm.rereceivedMessage(index, pictureBox1, label3);
             if (state == 1 || state == 2)
             {//a move was played
                 pictureBox1.Invalidate();
