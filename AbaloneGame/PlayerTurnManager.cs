@@ -20,9 +20,7 @@ namespace AbaloneGame
             resetMiniDataStruct();
             this.board = b;
         }
-        /**
-        * program initializes pressedbuttons array.
-        */
+        // program initializes pressedbuttons array.
         private void resetMiniDataStruct()
         {
             pressedbuttons = new sbyte[6];
@@ -33,14 +31,15 @@ namespace AbaloneGame
             pressedbuttons[4] = -1;
             pressedbuttons[5] = -1;
         }
-        /**
-        * program receives client press index and checks if click is:
-        * first click / second click (rowcheck) / third click(rowcheck) / direction click (side or push check)
-        * if it is the start of turn then pressedbuttons[0] =[1]= [2] = -1;
-        * @param index - pressed button index
-        * @param currentplayer - who pressed.
-        * @return Move if end of a valid turn , null if not.
-        */
+        /// <summary>
+        /// program receives player's press index and checks if click is:
+        /// first click / second click(rowcheck) / third click(rowcheck) / direction click(side or push check)
+        /// if it is the start of turn then pressedbuttons[0] =[1] = [2] = -1; 
+        /// </summary>
+        /// <param name="index">pressed button index</param>
+        /// <param name="currentplayer">who pressed.</param>
+        /// <param name="pictureBox"></param>
+        /// <returns> Move if end of a valid turn , null if not. </returns>
         public Move recivedPress(sbyte index, int currentplayer, PictureBox pictureBox)
         {
             //first press
@@ -56,12 +55,13 @@ namespace AbaloneGame
             // DataStructure is not empty
             return CaseNotFirstPress(index, currentplayer, pictureBox);
         }
-        /**
-        * program checks if it is a false press, second /third/ 4th press and if it is the last press in turn.
-        * @param index - pressed button index
-        * @param currentplayer - who pressed.
-        * @return Move if end of a valid turn , null if not.
-        */
+        /// <summary>
+        /// program checks if it is a false press, second /third/ 4th press and if it is the last press in turn.
+        /// </summary>
+        /// <param name="index">pressed button index</param>
+        /// <param name="currentplayer">who pressed.</param>
+        /// <param name="pictureBox"></param>
+        /// <returns>Move if end of a valid turn , null if not.</returns>
         private Move CaseNotFirstPress(sbyte index, int currentplayer, PictureBox pictureBox)
         {
             int CurrentPressValue = board.GetValueInPosition(index);
@@ -106,13 +106,14 @@ namespace AbaloneGame
                 return CaseLastPressInTurn(index, currentplayer, pictureBox);
             }
         }
-        /**
-        * program checks if the last press is part of row/side move. and if it is a valid move.
-        * can be 2nd/3rd/4th press.
-        * @param index - pressed button index
-        * @param currentplayer - who pressed.
-        * @return Move if end of a valid turn , null if not.
-        */
+        /// <summary>
+        /// program checks if the last press is part of row/side move.and if it is a valid move.
+        /// can be 2nd/3rd/4th press.
+        /// </summary>
+        /// <param name="index">pressed button index</param>
+        /// <param name="currentplayer">who pressed.</param>
+        /// <param name="pictureBox"></param>
+        /// <returns>Move if end of a valid turn , null if not.</returns>
         private Move CaseLastPressInTurn(sbyte index, int currentplayer, PictureBox pictureBox)
         {
             //Move to fillin and return.
@@ -184,11 +185,12 @@ namespace AbaloneGame
                 return m;
             }
         }
-        /**
-        * program resets the pressedbuttons array.
-        * program sends messages to client to reset pressed colors there too.
-        * @param currentplayer - current player.
-        */
+        /// <summary>
+        /// program resets the pressedbuttons array.
+        /// program sends messages to client to reset pressed colors there too.
+        /// </summary>
+        /// <param name="currentplayer">current player.</param>
+        /// <param name="pictureBox"></param>
         private void CancelTurn(int currentplayer, PictureBox pictureBox)
         {
             MessageBox.Show("Invalid Move");
@@ -209,9 +211,9 @@ namespace AbaloneGame
                 pressedbuttons[2] = -1;
             }
         }
-        /**
-        * program resets pressedbuttons array. (usually after a valid move has found)
-        */
+        /// <summary>
+        /// program resets pressedbuttons array. (usually after a valid move has been found)
+        /// </summary>
         private void emptyArr()
         {
             Console.WriteLine("reached empty arr");

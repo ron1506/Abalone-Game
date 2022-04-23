@@ -25,20 +25,19 @@ namespace AbaloneGame
         bool isPVP;
         //is waiting for user input.
         bool isWaitingToPlayer = false;
-        /**
-        * Constructor.
-        * @param point - server end point
-        */
+        /// <summary>
+        /// constructor.
+        /// </summary>
         public GameManager()
         {
             this.currentplayer = 1;
             this.board = new Board();
         }
-        /**
-        * the program get called once the client pressed the start game button.
-        * the program initializes the board and sends messeges of the board to the client.
-        * @param BoardLayout - the game layout.
-        */
+        /// <summary>
+        /// the program get called once after the client pressed on the start player vs player game button.
+        /// the program initializes the board correspondingly.
+        /// </summary>
+        /// <param name="BoardLayout">the game layout.</param>
         public void StartGamePlayerVsPlayer(int BoardLayout)
         {
             //init the board values
@@ -48,11 +47,11 @@ namespace AbaloneGame
             isPVP = true;
             isWaitingToPlayer = true;
         }
-        /**
-        * program gets called when client presses "start game player vs AI"
-        * program initialize required parts in code.
-        * @param BoardLayout - the game layout.
-        */
+        /// <summary>
+        /// the program get called once after the client pressed on the start player vs computer game button.
+        /// the program initializes the board correspondingly.
+        /// </summary>
+        /// <param name="BoardLayout">the game layout.</param>
         public void StartGamePlayerVsAI(int BoardLayout)
         {
             board.initializeBoard(BoardLayout);
@@ -61,10 +60,12 @@ namespace AbaloneGame
             AI = new AIManager(-1);
             isWaitingToPlayer = true;
         }
-        /**
-        * program switches beetween players/AI.
-        * If the game mode is pvAI than its activates the ai.
-        */
+        /// <summary>       
+        /// program switches beetween players/AI.
+        /// If the game mode is Player vs AI than its activates the  AI turn.
+        /// </summary>
+        /// <param name="label">the label that indicates which one turn is it.</param>
+        /// <returns></returns>
         public int switchPlayers(Label label)
         {
             int iswin = 0;
@@ -91,23 +92,30 @@ namespace AbaloneGame
                     Move AIMove = AI.playTurn(board, currentplayer);
 
                     // implementing move in game board
-                    iswin = board.makeMove(AIMove);
+                    iswin = board.makeMove(AIMove); 
+                    if (iswin == 1)
+                    {
+                        return iswin;
+                    }
                     currentplayer = currentplayer * -1;
                 }
-                if (iswin == 1)
-                    return iswin;
-                    //this.WinFound(currentplayer * -1);
                 isWaitingToPlayer = true;
                 return iswin;
             }
             //after turn has been committed, its player turn again.
         }
-        /**
-        * program recives a press index of client, sends the index to the turn
-        * manager which returns a move.
-        * if it is not end of turn than move = null.
-        * @param index - client press index.
-        */
+        /// <summary>
+        /// program recives a press index of client, sends the index to the turn
+        /// manager which returns a move.
+        /// if it is not end of turn than move = null.
+        /// </summary>
+        /// <param name="index">the index of the tile in the board that have been pressed.</param>
+        /// <param name="pictureBox">the picturebox that contains the board.</param>
+        /// <param name="label">the label that indicates which one turn is it.</param>
+        /// <returns> 0 - if there wasn't a move.
+        /// 1- if there was amove with no win.
+        /// 2- if there was a move with a win.
+        /// </returns>
         public int rereceivedMessage(int index, PictureBox pictureBox, Label label)
         {
             Graphics g = pictureBox.CreateGraphics();
@@ -137,18 +145,34 @@ namespace AbaloneGame
             }
             return 0;
         }
+        /// <summary>
+        /// returns an int that indicates which player's turn it is.
+        /// </summary>
+        /// <returns> 
+        /// (-1) - for black
+        /// 1 - for white
+        /// </returns>
         public int getCurrentPlayer()
         {
             return currentplayer;
         }
-
+        /// <summary>
+        /// returns a string that indicates which player's turn it is.
+        /// </summary>
+        /// <returns> 
+        /// Black - for black
+        /// White - for white
+        /// </returns>
         public string PlayerTurn()
         {
             if (currentplayer == 1)
                 return "White";
             return "Black";
         }
-
+        /// <summary>
+        /// return's true if the score of one of the players is above 6.
+        /// </summary>
+        /// <returns>true if game is over, false otherwise.</returns>
         public bool isGameOver()
         {
             return (board.getScoreBlack() == 6 || board.getScoreWhite() == 6);

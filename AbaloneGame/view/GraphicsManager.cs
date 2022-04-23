@@ -96,6 +96,11 @@ namespace AbaloneGame.view
             }
 
         }
+        /// <summary>
+        /// the method paints the board, using graphics.
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="board">the game board.</param>
         public static void PaintBoard(Graphics g, Board board)
         {
             for (int i = 0; i < 121; i++)
@@ -109,10 +114,6 @@ namespace AbaloneGame.view
                     else if (board.getWhiteSet().get(i))
                     {//draw the circle white.
                         g.FillEllipse(Brushes.White, (float)(index_to_position[i][0] - RADIUS), (float)(index_to_position[i][1] - RADIUS), RADIUS, RADIUS);
-                    }
-                    else
-                    { //empty
-                        //g.FillEllipse(Brushes.Red, (float)(index_to_position[i][0] - RADIUS), (float)(index_to_position[i][1] - RADIUS), RADIUS, RADIUS);
                     }
                 }
             }

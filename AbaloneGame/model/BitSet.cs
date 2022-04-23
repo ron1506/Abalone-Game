@@ -41,6 +41,11 @@ namespace AbaloneGame.model
                 throw new IndexOutOfRangeException();
             return bits[bitIndex];
         }
+        /// <summary>
+        /// returns the first index that after the fromindex (including fromIndex) in the bitset that is on.
+        /// </summary>
+        /// <param name="fromIndex">the index from which we starting to check. </param>
+        /// <returns></returns>
         public int nextSetBit(int fromIndex)
         {
             if (fromIndex < 0)
@@ -52,12 +57,21 @@ namespace AbaloneGame.model
             }
             return -1;
         }
+        /// <summary>
+        /// sets the bit in the given index, to the given value.
+        /// </summary>
+        /// <param name="bitIndex">the given index</param>
+        /// <param name="value">given value. </param>
         public void set(int bitIndex, bool value)
         {
             if (bitIndex < 0)
                 throw new IndexOutOfRangeException();
             bits[bitIndex] = value;
         }
+        /// <summary>
+        /// cloning the bit set
+        /// </summary>
+        /// <returns>new identical bitset. </returns>
         public BitSet clone()
         {
             BitSet clonedBitSet = new BitSet(Length);

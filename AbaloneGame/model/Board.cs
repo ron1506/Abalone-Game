@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
 namespace AbaloneGame.model
 {
@@ -81,11 +75,11 @@ namespace AbaloneGame.model
             pathArr[4] = 12;
             pathArr[5] = 11;
         }
-        /**
-        * program creats new 3 bitsets -
-        * whiteSet, BlackSet, EdgeOfBoard.
-        * @param BoardLayout - sets the start game layout according to the BoardLayout
-        */
+        /// <summary>     
+        /// program creats new 3 bitsets -
+        /// whiteSet, BlackSet, EdgeOfBoard.
+        /// </summary>
+        /// <param name="BoardLayout">sets the start game layout according to the BoardLayout.</param>
         public void initializeBoard(int BoardLayout)
         {
             initpathArr();
@@ -201,14 +195,11 @@ namespace AbaloneGame.model
                 WhiteSet.set(34);
             }
         }
-        /**
-        * function return the value of position in board.
-        * @param position - position to check value for.
-        * @return - -9 if not in board, 1 if in whiteset, -1 if in blackset ,0 if not pressed (not in both).
-        */
-        //function gets bit position and return 1 if in whiteset,
-        //-1 if in blackset and 0 if not pressed (not in both).
-        //return -9 if not in board.
+        /// <summary>
+        /// function return the value of position in board.
+        /// </summary>
+        /// <param name="position">position to check value for.</param>
+        /// <returns> -9 if not in board, 1 if in whiteset, -1 if in blackset ,0 if not pressed(not in both).</returns>
         public sbyte GetValueInPosition(sbyte position)
         {
             //not in board
@@ -221,51 +212,51 @@ namespace AbaloneGame.model
             //if reached than no one is true so empty.
             return 0;
         }
-        /**
-        * program sets value in given position
-        * @param position - position to change.
-        * @param value - the value to change to.
-        */
+        /// <summary>
+        /// program sets value in given position.
+        /// </summary>
+        /// <param name="position">position to change.</param>
+        /// <param name="value"> the value to change to.</param>
         public void SetValueInPosition(sbyte position, sbyte value)
         {
             switch (value)
             {
                 case 1:
-                    {
+                    { //was black, now white.
                         WhiteSet.set(position, true);
                         BlackSet.set(position, false);
                         break;
                     }
                 case 0:
-                    {
+                    { //now free.
                         WhiteSet.set(position, false);
                         BlackSet.set(position, false);
                         break;
                     }
                 case -1:
-                    {
+                    { // was white, now black.
                         WhiteSet.set(position, false);
                         BlackSet.set(position, true);
                         break;
                     }
             }
         }
-        /**
-        *program gets position and return true if in board.
-        * @param position - position to check
-        * @return - true if in board, false if not.
-        */
+        /// <summary>
+        /// program gets position and return true if in board.
+        /// </summary>
+        /// <param name="position">position to check</param>
+        /// <returns>true if in board, false if not.</returns>
         public bool isPositionInBoard(sbyte position)
         {
             return EdgeOfBoard.get(position);
         }
-        /**
-        * program check if teo positions are next to each other.
-        * !! does not check if 2 positions are in board.
-        * @param posA - first position
-        * @param posB - second position
-        * @return true if both positions are next to each other.
-        */
+        /// <summary>
+        /// program check if tow positions are next to each other.
+        /// !! does not check if 2 positions are in board.
+        /// </summary>
+        /// <param name="posA">first position</param>
+        /// <param name="posB">second position</param>
+        /// <returns> true if both positions are next to each other. </returns>
         public bool IsPositionsTogether(sbyte posA, sbyte posB)
         {
             sbyte givenDirection = (sbyte)(posB - posA);
@@ -279,12 +270,12 @@ namespace AbaloneGame.model
             //if reached than they are not together.
             return false;
         }
-        /**
-        * program gets 2 position and return the next position in line.
-        * @param posA - first position
-        * @param posB - second position
-        * @return posC if position found, -9 if position is not in board.
-        */
+        /// <summary>
+        /// program gets 2 position and return the next position in line.
+        /// </summary>
+        /// <param name="posA">first position</param>
+        /// <param name="posB">second position</param>
+        /// <returns> posC if position found, -9 if position is not in board.</returns>
         public sbyte getNextPositionInLine(sbyte posA, sbyte posB)
         {
             sbyte posC = (sbyte)(posB - posA + posB);
@@ -292,13 +283,13 @@ namespace AbaloneGame.model
                 return posC;
             return -9;
         }
-        /**
-        * program returns the position of posSideA
-        * @param posA - first position
-        * @param posB - second position, next to posA
-        * @param posSideB - second side position, in side to posB
-        * @return -9 if posSideA is not in board, else returns posA.
-        */
+        /// <summary>
+        /// program returns the position of posSideA
+        /// </summary>
+        /// <param name="posA">first position</param>
+        /// <param name="posB">second position, next to posA</param>
+        /// <param name="posSideB">second side position, in side to posB</param>
+        /// <returns> -9 if posSideA is not in board, else returns posA.</returns>
         public sbyte get4thPosInSideMove(sbyte posA, sbyte posB, sbyte posSideB)
         {
             sbyte direction = (sbyte)(posSideB - posB);
@@ -306,36 +297,38 @@ namespace AbaloneGame.model
                 return -9;
             return (sbyte)(posA + direction);
         }
-        /**
-        * program gets a valid move and updates current board from the move.
-        * @param move - valid move to implement.
-        * @return 1 if Winfound, 0 if not.
-        */
+        /// <summary>
+        /// program gets a valid move and updates current board from the move.
+        /// </summary>
+        /// <param name="move">valid move to implement.</param>
+        /// <returns>1 if Winfound, 0 if not.</returns>
         public int makeMove(Move move)
         {
             //move indxex:
             sbyte[] indexesarray = move.getIndexs();
-            //in all moves the first position will be 0;
+            //in all moves the first position will be the pusher's ball;
             sbyte ownV = GetValueInPosition(indexesarray[0]);
             if (move.getRowMove())
-            {
+            { //if a row move
+                //in all moves the first position after the push will be 0;
                 SetValueInPosition(indexesarray[0], (sbyte)0);
                 //send all own moves including next.
                 for (int i = 1; i < move.getNumOfOwn() + 1; i++)
-                {
-                    SetValueInPosition(indexesarray[i], ownV);
+                { // gives each next place it's previous value, the pushing balls.
+                    SetValueInPosition(indexesarray[i], ownV); 
                 }
                 //updates enemy balls.
                 for (int i1 = 0; i1 < move.getNumToPush(); i1++)
-                {
+                { // gives each next place it's previous value, the pushed balls.
                     //enemy value is ownv * -1
                     SetValueInPosition(indexesarray[move.getNumOfOwn() + 1 + i1], (sbyte)(ownV * -1));
                 }
             }
             else
-            {// side move.
+            {// a side move, no pushed balls.
                 for (int i = 0; i < move.getNumOfOwn(); i++)
                 {
+                    //in a side move the original positions after the push will be 0;
                     SetValueInPosition(indexesarray[i], (sbyte)0);
                     SetValueInPosition(indexesarray[i + move.getNumOfOwn()], (sbyte)ownV);
                 }
@@ -344,13 +337,13 @@ namespace AbaloneGame.model
             if (move.ifIsScore())
             {
                 if (ownV == 1)
-                {
+                { // white score
                     scoreWhite++;
                     if (scoreWhite >= 6)
                         return 1;
                 }
                 else
-                {
+                { // black score
                     scoreBlack++;
                     if (scoreBlack >= 6)
                         return 1;
@@ -359,26 +352,28 @@ namespace AbaloneGame.model
             //win not found
             return 0;
         }
+
         /////////////////////////////////////////////////Moves check/////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        /**
-        * program gets two points: A and B are next to each other.
-        * the programs return if posC is in line after B.
-        * @param posA - first position
-        * @param posB - second position (next to posA)
-        * @param posC - third position
-        * @return true if posA, posB and posC are in a line.
-        */
+        
+        /// <summary>
+        /// program gets two points: A and B are next to each other.
+        // the programs return if posC is in line after B.
+        /// </summary>
+        /// <param name="posA">first position</param>
+        /// <param name="posB">second position (next to posA)</param>
+        /// <param name="posC">third position</param>
+        /// <returns> true if posA, posB and posC are in a line.</returns>
         public bool isPositionsInLine3(sbyte posA, sbyte posB, sbyte posC)
         {
             //checks if the change between x and y values is the same.
-            return ((posB - posA) == (posC - posB));
+            return ((posB -posA) == (posC -posB));
         }
-        /**
-        * the program switches the valueS of two given positions.
-        * @param posA - first position
-        * @param posB - second position
-        */
+        /// <summary>
+        /// the program switches the valueS of two given positions.
+        /// </summary>
+        /// <param name="posA">first position</param>
+        /// <param name="posB">second position</param>
         public void switchPositions(sbyte posA, sbyte posB)
         {
             sbyte posAValue = GetValueInPosition(posA);
@@ -386,13 +381,13 @@ namespace AbaloneGame.model
             WhiteSet.set(posA, posBValue);
             BlackSet.set(posB, posAValue);
         }
-        /**
-        * program tries to create a move of push 2 balls in the direction of posC.
-        * @param posA - first position (own)
-        * @param posB - second position(next to posA , own)
-        * @param posC - third position (in line) can be (valueof posA)*-1 or 0
-        * @return move if found a valid move, null if not.
-        */
+        /// <summary> 
+        /// program tries to create a move of push 2 balls in the direction of posC.
+        /// </summary>
+        /// <param name="posA"> first position (own)</param>
+        /// <param name="posB"> second position(next to posA, own)</param>
+        /// <param name="posC"> third position(in line) can be(valueof posA)*-1 or 0</param>
+        /// <returns>move if found a valid move, null if not.</returns>
         public Move TryToPush2(sbyte posA, sbyte posB, sbyte posC)
         {
             Move mov = new Move();
@@ -422,14 +417,14 @@ namespace AbaloneGame.model
             mov.new2BallsMove1PushNoScore(posA, posB, posC, posD);
             return mov;
         }
-        /**
-        * program tries to create a move of push 3 balls in the direction of posD.
-        * @param posA - first position (own)
-        * @param posB - second position(next to posA , own)
-        * @param posC - second position(in line , own)
-        * @param posD - third position (in line) can be (valueof posA)*-1 or 0
-        * @return move if found a valid move, null if not.
-        */
+        /// <summary>
+        /// program tries to create a move of push 3 balls in the direction of posD.
+        /// </summary>
+        /// <param name="posA">first position (own)
+        /// <param name="posB">second position(next to posA , own)
+        /// <param name="posC">second position(in line , own)
+        /// <param name="posD">third position (in line) can be (valueof posA)*-1 or 0
+        /// <return> move if found a valid move, null if not.</returns>
         public Move TryToPush3(sbyte posA, sbyte posB, sbyte posC, sbyte posD)
         {
             if (GetValueInPosition(posD) == 0)
@@ -481,13 +476,13 @@ namespace AbaloneGame.model
             //3 own 3 enemy -> cannot push.
             return null;
         }
-        /**
-        * program check if can do a side move of posA and posB to posSideA and posSideB
-        * @param posA - first position
-        * @param posB - second position (next to posA , own)
-        * @param posSideB - first sids position , empty.
-        * @return move if found a valid move, null if not.
-*/
+        /// <summary>
+        /// program check if can do a side move of posA and posB to posSideA and posSideB
+        /// </summary>
+        /// <param name="posA">first position </param>
+        /// <param name="posB">second position (next to posA , own) </param>
+        /// <param name="posSideB">first sids position , empty. </param>
+        /// <return> move if found a valid move, null if not.</returns> </param>
         public Move TryToSideMove2(sbyte posA, sbyte posB, sbyte posSideB)
         {
             ///both side poses must be 0;
@@ -507,14 +502,14 @@ namespace AbaloneGame.model
             mov.new2BallsSideMove(posA, posB, posSideA, posSideB);
             return mov;
         }
-        /**
-        * program check if can do a side move of posA, posB and posC to posSideA and posSideB and posSideC
-        * @param posA - first position
-        * @param posB - second position (next to posA , own)
-        * @param posB - second position (in line , own)
-        * @param posSideC - first side position , empty.
-        * @return move if found a valid move, null if not.
-        */
+        /// <summary>
+        /// program check if can do a side move of posA, posB and posC to posSideA and posSideB and posSideC
+        /// </summary>
+        /// <param name="posA">first position</param>
+        /// <param name="posB">second position (next to posA , own)</param>
+        /// <param name="posB">second position (in line , own)</param>
+        /// <param name="posSideC">first side position , empty. </param>
+        /// <return> move if found a valid move, null if not. </returns>
         public Move TryToSideMove3(sbyte posA, sbyte posB, sbyte posC, sbyte posSideC)
         {
             ///both side poses must be 0;
@@ -540,11 +535,11 @@ namespace AbaloneGame.model
         }
 
         //////////////////////////////////////////// AI Functions///////////////////////////////////////////////////
-        /**
-        * program finds all the possible moves of Currentplayer from current board.
-        * @param currentPlayer - player to search moves for.
-        * @return list of all possible moves of current player.
-        */
+        /// <summary>
+        /// program finds all the possible moves of Currentplayer from current board.
+        /// </summary>
+        /// <param name="currentPlayer">player to search moves for.</param>
+        /// <return> list of all possible moves of current player. </returns>
         public ArrayList getmoves(sbyte currentPlayer)
         {
             ArrayList MoveList = new ArrayList(60);
@@ -553,15 +548,14 @@ namespace AbaloneGame.model
             sbyte[] sideArray;
             //set own and enemy sets
             BitSet ownSet = (currentPlayer == 1) ? WhiteSet : BlackSet;
-            //go ovet all balls in bitset to put as first click.
+            //go over all balls in bitset (set places) as a first click.
             for (sbyte posA = (sbyte)ownSet.nextSetBit(0); posA != -1; posA = (sbyte)ownSet.nextSetBit(posA + 1))
             {
-                //gets all neighbors positions.
+                //gets all neighbors positions of the current chosen ball.
                 possiblePoisitionsArray = getNeighborsOfPossition(posA);
-                /// go over each of neighbors positions in posB.
+                /// go over each of neighbors positions.
                 foreach (sbyte posB in possiblePoisitionsArray)
-                {
-                    //if position is not a valid neighbor.
+                { //if position is not a valid neighbor (out of the board).
                     if (posB == -1)
                         continue;
                     //checks if posB is Empty
@@ -583,14 +577,14 @@ namespace AbaloneGame.model
                         if (posC != -9)
                         {//posC is inBoard.
                             if (GetValueInPosition(posC) == currentPlayer)
-                            {
+                            { //posC in the board
                                 sbyte posD = getNextPositionInLine(posB, posC);
                                 if (posD != -9)
-                                {
+                                { //posD is inBoard.
                                     move = new Move();
-                                    move = TryToPush3(posA, posB, posC, posD);
+                                    move = TryToPush3(posA, posB, posC, posD); // returns a legal move if one was found, null otherwise.
                                     if (move != null)
-                                        MoveList.Add(move);
+                                        MoveList.Add(move); // adds the move to the list of possible moves.
                                 }
                             }
                             else
@@ -604,7 +598,7 @@ namespace AbaloneGame.model
                         //to check all possible side moves of 2 balls.
                         sideArray = getNeighborsOfPossition(posB);
                         /// go over each of neighbors positions from posB.
-                        foreach(sbyte posSideB in sideArray)
+                        foreach (sbyte posSideB in sideArray)
                         {
                             //if position is not a valid neighbor.
                             if (posSideB == -1)
@@ -644,16 +638,14 @@ namespace AbaloneGame.model
             }
             return MoveList;
         }
-        /*
-        * program returns a byte arr of all positions next to the given position.
-        * if position is not in board than it is -1.
-        */
-        /**
-        * program creates a bute array of all positions next to a given position.
-        * if a positions is not in board, its -1 in the array.
-        * @param position - position to creates neighbors array
-        * @return byte array of neighbors , -1 for each one is out of board.
-        */
+        /// <summary>        
+        /// program returns a byte arr of all positions next to the given position.
+        /// if position is not in board than it is -1.
+        /// program creates a bute array of all positions next to a given position.
+        /// if a positions is not in board, its -1 in the array.
+        /// </summary>
+        /// <param name="position">position to creates neighbors array</param>
+        /// <returns> byte array of neighbors, -1 for each neighbor that is out of board. </returns>
         public sbyte[] getNeighborsOfPossition(sbyte position)
         {
             sbyte pos;
@@ -669,10 +661,10 @@ namespace AbaloneGame.model
             }
             return arr;
         }
-        /**
-        * program gets a board instance and sets current (this) board the values of the given board.
-        * @param b - board to clone
-        */
+        /// <summary>
+        /// program gets a board instance and sets current (this) board the values of the given board.
+        /// </summary>
+        ///<param name="b">board to clone</param>
         public void cloneBoard(Board b)
         {
             this.WhiteSet = (BitSet)b.WhiteSet.clone();

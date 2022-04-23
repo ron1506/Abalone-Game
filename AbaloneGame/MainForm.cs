@@ -15,9 +15,12 @@ namespace AbaloneGame
     public partial class MainForm : Form
     {
         GameManager gm;
-        //private bool isPvP;
-        //private int layout;
-        //PlayerTurnManager tm;
+
+        /// <summary>
+        /// Constructor, creates the MainForm.
+        /// </summary>
+        /// <param name="isPvP">if the mode is player vs. player.</param>
+        /// <param name="layout">the board chosen layout.</param>
         public MainForm(bool isPvP, int layout)
         {
             gm = new GameManager();
@@ -31,17 +34,29 @@ namespace AbaloneGame
             GraphicsManager.init_dictionary();
             InitializeComponent();
         }
-
+        /// <summary>
+        /// defaulted method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
         }
-
+        /// <summary>
+        /// drawing the board.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             GraphicsManager.PaintBoard(e.Graphics, gm.Board);
             label3.Text = gm.PlayerTurn() + " Player turn.";
         }
-
+        /// <summary>
+        /// OnClick method, deals if a circle is chosen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_onClick(object sender, MouseEventArgs e)
         {
             Graphics g = pictureBox1.CreateGraphics();
@@ -55,10 +70,14 @@ namespace AbaloneGame
             }
             if (gm.isGameOver())
             {
-                MessageBox.Show("Game is over " + gm.PlayerTurn() + " won.");
+                MessageBox.Show("Game is over " + gm.PlayerTurn() + " won."); //show who won.
             }
         }
-
+        /// <summary>
+        /// back to open screen form, OnClick method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             OpenForm of = new OpenForm();
