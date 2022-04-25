@@ -1,45 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="AbaloneGame.model.BitSet">
-    <Position X="9.25" Y="0.5" Width="1.5" />
+    <Position X="8.5" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAEAEAAAQAQABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAEAEAAAQAQABAAAAAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>model\BitSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AbaloneGame.model.Board">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="1.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AUAABAIAChIgAACAAGICAjCAACAgAAIAAAMIAMACAgg=</HashCode>
+      <HashCode>EUAABAIAChIgAACAAGYCAjCAACAgAAIAAAMIAMACAgg=</HashCode>
       <FileName>model\Board.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="EdgeOfBoard" />
+      <Field Name="WhiteSet" />
+      <Field Name="BlackSet" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="AbaloneGame.model.Move">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="10.75" Y="1.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAFAAIAAAUCAAkAAAAAFAEAAAiAAACEAIAAgACBIAA=</HashCode>
       <FileName>model\Move.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AbaloneGame.view.GraphicsManager">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="3.25" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAkACAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>view\GraphicsManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AbaloneGame.GameManager">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Position X="10.75" Y="7" Width="1.75" />
+    <AssociationLine Name="AI" Type="AbaloneGame.AIManager" ManuallyRouted="true">
+      <Path>
+        <Point X="12.5" Y="8.869" />
+        <Point X="13.325" Y="8.869" />
+        <Point X="13.325" Y="6.808" />
+        <Point X="15" Y="6.808" />
+        <Point X="15" Y="5.805" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AIACgAAAAAEAAABBQAAAAACAAAAAAAAAIAAJACAgAAA=</HashCode>
+      <HashCode>AYACgAAAAAEAAABBQAAAAACAAAAAAAAAIAAJACAgAAA=</HashCode>
       <FileName>GameManager.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="board" />
+      <Field Name="Pturn" />
+      <Field Name="AI" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="AbaloneGame.PlayerTurnManager">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="8" Y="4.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAABACAAAIAAAAgAAAAAABAAAAAgIAAAABAAAAA=</HashCode>
       <FileName>PlayerTurnManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="board" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AbaloneGame.AIManager">
+    <Position X="13.75" Y="1.75" Width="2.5" />
+    <AssociationLine Name="Distances" Type="AbaloneGame.model.BitSet" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.125" Y="1.75" />
+        <Point X="15.125" Y="0.795" />
+        <Point X="9.375" Y="0.795" />
+        <Point X="9.375" Y="1.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QBIAAiAAAAAAAAAAAQEAIAACAAIAKABAAAAAAAgAEAA=</HashCode>
+      <FileName>AIManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Distances" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AbaloneGame.OpenForm">
+    <Position X="16.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAAACAAAYAAAAAGAAAABAAAA=</HashCode>
+      <FileName>OpenForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AbaloneGame.MainForm">
+    <Position X="15.25" Y="6.5" Width="2" />
+    <AssociationLine Name="gm" Type="AbaloneGame.GameManager" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="9.5" />
+        <Point X="12.5" Y="9.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAFAAAACAEAACAAAIAAAAAEAAAABAIAA=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gm" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AbaloneGame.ChooseLayoutForm">
+    <Position X="3.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABABAACAAAACAMA4AAAAAHAMAABAAAA=</HashCode>
+      <FileName>ChooseLayoutForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AbaloneGame.Program">
+    <Position X="8" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -18,7 +18,7 @@ namespace AbaloneGame
         // the value given for a move that have a score.
         private const int ValueOfScoredBalls = 1000;
         // Alpha Beta recursion depth
-        private const int depthToSearch = 2;
+        private const int depthToSearch = 3;
 
         /// <summary>
         /// constructor, sends to a function that initializing the distances in the board.
@@ -48,7 +48,7 @@ namespace AbaloneGame
             foreach (Board childBoard in AllBoards)
             { //goes over all the possible boards from the list.
                 tempvalue = AlphaBeta(childBoard, depthToSearch, -2100000, 2100000, (sbyte)(currentplayer * -1));
-                //searches for the minimum value by whites point of view. (red is AI).
+                //searches for the minimum value by whites point of view. (black is AI).
                 if (tempvalue < bestValue)
                 {
                     bestValue = tempvalue;

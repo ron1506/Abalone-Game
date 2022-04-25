@@ -34,7 +34,7 @@ namespace AbaloneGame
             this.board = new Board();
         }
         /// <summary>
-        /// the program get called once after the client pressed on the start player vs player game button.
+        /// the program is being called once after the client pressed on the start player vs player game button.
         /// the program initializes the board correspondingly.
         /// </summary>
         /// <param name="BoardLayout">the game layout.</param>
@@ -65,7 +65,7 @@ namespace AbaloneGame
         /// If the game mode is Player vs AI than its activates the  AI turn.
         /// </summary>
         /// <param name="label">the label that indicates which one turn is it.</param>
-        /// <returns></returns>
+        /// <returns>1 if a win was found, 0 otherwise.</returns>
         public int switchPlayers(Label label)
         {
             int iswin = 0;

@@ -216,7 +216,6 @@ namespace AbaloneGame
         /// </summary>
         private void emptyArr()
         {
-            Console.WriteLine("reached empty arr");
             //reset array
             pressedbuttons[0] = -1;
             pressedbuttons[1] = -1;

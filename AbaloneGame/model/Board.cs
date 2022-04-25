@@ -370,7 +370,7 @@ namespace AbaloneGame.model
             return ((posB -posA) == (posC -posB));
         }
         /// <summary>
-        /// the program switches the valueS of two given positions.
+        /// the program switches the values of two given positions.
         /// </summary>
         /// <param name="posA">first position</param>
         /// <param name="posB">second position</param>

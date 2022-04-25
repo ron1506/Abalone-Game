@@ -39,11 +39,6 @@ namespace AbaloneGame.model
             return isScore;
         }
 
-        /**
-        * program updates the current class with those parameters.
-        * @param posA - first position, own
-        * @param posB - second position, empty
-        */
         public void new1BallMove(sbyte posA, sbyte posB)
         {
             //initialize array
